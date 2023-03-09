@@ -22,7 +22,7 @@ int main()
     if (flag == 0) {
         string2[6] = '^';
         printf("%s", string2);
-        printf("\nError at column 6: expected '('");
+        printf("\nError at column 6: expected '('\n");
         return 0;
     }
     flag = 0;
@@ -36,14 +36,14 @@ int main()
     if (flag == 0) {
         string2[15] = '^';
         printf("%s", string2);
-        printf("\nError at column 15: expected ')'");
+        printf("\nError at column 15: expected ')'\n");
         return 0;
     }
     for (int i = r + 1; i < strlen(string); ++i) {
         if (string[i] != ' ') {
             string2[i] = '^';
             printf("%s", string2);
-            printf("\nError at column %d: unexpected token", i);
+            printf("\nError at column %d: unexpected token\n", i);
             return 0;
         }
     }
@@ -60,7 +60,7 @@ int main()
           && (string1[5] == 'e' || string1[5] == 'E') && (string[6] == '('))) {
         string2[0] = '^';
         printf("%s", string2);
-        printf("\nError at column 0: expected 'circle'");
+        printf("\nError at column 0: expected 'circle'\n");
         return 0;
     }
     printf("%s\n", string);
@@ -76,7 +76,7 @@ int main()
              && string[i] != '8' && string[i] != '9' && string[i] != '0')) {
             string2[i] = '^';
             printf("%s", string2);
-            printf("\nError at column %d: expected '<double>'", i);
+            printf("\nError at column %d: expected '<double>'\n", i);
             return 0;
         }
     }
