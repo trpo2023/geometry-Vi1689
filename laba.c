@@ -73,7 +73,8 @@ int main()
         if ((string[i] != ',' && string[i] != '.' && string[i] != '1'
              && string[i] != '2' && string[i] != '3' && string[i] != '4'
              && string[i] != '5' && string[i] != '6' && string[i] != '7'
-             && string[i] != '8' && string[i] != '9' && string[i] != '0')) {
+             && string[i] != '8' && string[i] != '9' && string[i] != '0'
+             && string[i] != '-')) {
             string2[i] = '^';
             printf("%s", string2);
             printf("\nError at column %d: expected '<double>'\n", i);
