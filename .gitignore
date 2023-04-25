@@ -1,7 +1,6 @@
-*/*.txt
-*/*.html
 *.o
-.main.c.swp
-main.c~
-#main.c#
+*.d
+*.a
+main
+build/
 .vscode
