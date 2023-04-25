@@ -6,7 +6,7 @@
 int main()
 {
     char* string = malloc(sizeof(char) * 200);
-    gets(strinerwg);123
+    gets(string);
     circle(string);
     return 0;
 }
