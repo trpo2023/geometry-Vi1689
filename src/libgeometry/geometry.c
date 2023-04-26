@@ -94,7 +94,7 @@ int circle(char* string)
         }
     }
     number1[k] = atof(number);
-    printf("Perimeter = %f\nArea = %f",
+    printf("Perimeter = %f\nArea = %f\n",
            perimeter(number1[k]),
            area(number1[k]));
     free(string1);
