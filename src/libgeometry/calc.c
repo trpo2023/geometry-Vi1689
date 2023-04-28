@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define PI 3.14
+#define PI 3.1415
 
 double perimeter(double a)
 {
     double per;
     per = 2 * PI * a;
-    if (per * -1 > 0) {
+    if (per < 0) {
         per *= -1;
     }
     return per;

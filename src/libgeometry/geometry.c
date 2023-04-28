@@ -1,14 +1,53 @@
 #include <libgeometry/calc.h>
 #include <libgeometry/geometry.h>
+#include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#define kv(x) (x) * (x)
+
 #define PI 3.1415
 
-int circle(char* string)
+struct geometry* create(int maxsize)
 {
-    char* string1 = malloc(sizeof(char) * 200);
+    struct geometry* g = malloc(sizeof(*g));
+    if (g != NULL) {
+        g->maxsize = maxsize;
+        g->size = 0;
+        g->node = malloc(sizeof(*g->node) * maxsize);
+        if (!(g->node)) {
+            free(g);
+            return NULL;
+        }
+    }
+    return g;
+}
+
+void free_g(struct geometry* g)
+{
+    if (g->node != NULL) {
+        free(g->node);
+        free(g);
+    }
+}
+
+int g_insert(struct geometry* g, double xx, double yy, double rr)
+{
+    if (g->size > g->maxsize) {
+        return -1;
+    }
+    g->node[g->size].x = xx;
+    g->node[g->size].y = yy;
+    g->node[g->size].r = rr;
+    g->size++;
+    return 0;
+}
+
+int circle(char* string, struct geometry* g)
+{
+    char* string1 = malloc(sizeof(char) * 1000);
     int k = 0, l = 0, r = 0, p = 0, flag = 0;
     char* string2 = malloc(sizeof(char) * strlen(string));
     memset(string2, ' ', sizeof(char) * strlen(string));
@@ -84,9 +123,10 @@ int circle(char* string)
     k = 0;
     char* number = malloc(sizeof(char) * (r - l));
     float* number1 = malloc(sizeof(float) * (r - l));
-    for (int i = 7; i < r - 1; ++i) {
-        if (string1[i] != ',') {
-            number[p++] = string1[i];
+    // printf("\n%s\n", string);
+    for (int i = 7; i < r; ++i) {
+        if (string[i] != ',') {
+            number[p++] = string[i];
         } else {
             number1[k++] = atof(number);
             p = 0;
@@ -94,12 +134,39 @@ int circle(char* string)
         }
     }
     number1[k] = atof(number);
+    float* number2 = malloc(sizeof(float) * 3);
+    number2[0] = 0;
+    number2[1] = 0;
+    number2[2] = 0;
+    for (int i = 0, q = 0; i < r; ++i) {
+        if (number1[i] != 0) {
+            number2[q++] = number1[i];
+        }
+    }
+    if (g_insert(g, number2[0], number2[1], number2[2])) {
+        printf("Не записалось\n");
+        return 0;
+    }
+    // printf("%f %f %f\n",g->node[g->size - 1].x,g->node[g->size -
+    // 1].y,g->node[g->size - 1].r);
     printf("Perimeter = %f\nArea = %f\n",
-           perimeter(number1[k]),
-           area(number1[k]));
+           perimeter(g->node[g->size - 1].r),
+           area(g->node[g->size - 1].r));
     free(string1);
     free(number);
     free(number1);
+    free(number2);
     free(string2);
-    return 0;
+    return 1;
+}
+
+int intersections(struct geometry* g, int count, int i)
+{
+    double length_between
+            = sqrt(kv(g->node[count].x - g->node[i].x)
+                   + kv(g->node[count].y - g->node[i].y));
+    if (g->node[count].r + g->node[i].r > length_between) {
+        return 1; // пересекаются
+    }
+    return 0; // не пересекаются
 }
