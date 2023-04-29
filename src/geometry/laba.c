@@ -14,11 +14,11 @@ int main()
         circle(str, g);
         free(str);
     }
-    for(int i = 0; i < Quantity; ++i){
+    for (int i = 0; i < Quantity; ++i) {
         printf("%d круг пересекается с : ", i + 1);
-        for(int j = 0; j < Quantity; ++j){
-            if(i != j){
-                if(intersections(g, i, j)){
+        for (int j = 0; j < Quantity; ++j) {
+            if (i != j) {
+                if (intersections(g, i, j)) {
                     printf("%d  ", j + 1);
                 }
             }
