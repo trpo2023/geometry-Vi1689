@@ -1,6 +1,6 @@
+#include <ctest.h>
 #include <libgeometry/calc.h>
 #include <math.h>
-#include <ctest.h>
 
 #define PI 3.1415
 
